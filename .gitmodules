@@ -1,0 +1,4 @@
+[подмодуль "библиотеки/p5gui"]
+	путь = библиотеки/p5gui
+	url = https://github.com/bitcraftlab/p5.gui.git
+    
