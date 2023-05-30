@@ -1,0 +1,53 @@
+function drawTileGrid() {
+	push();
+	translate(-sizeT / 2, -sizeT / 2);
+
+	translate(0, 0, 0.01);
+	noFill();
+	stroke(0, 0, 150);
+	strokeWeight(1);
+	let n = Math.pow(2, curZ);
+	rectSize = 2 / n;
+	for (let i = 0; i <= n; i++) {
+		beginShape();
+		vertex(0, i * rectSize);
+		vertex(2, i * rectSize);
+		endShape(LINES);
+		beginShape();
+		vertex(i * rectSize, 0);
+		vertex(i * rectSize, 2);
+		endShape(LINES);
+	}
+	pop();
+}
+
+function drawGeoGrid() {
+	push();
+	translate(-sizeT / 2, -sizeT / 2);
+	let G = new Geo();
+	G.zoom = 0;
+	G.size = 2;
+	translate(0, 0, 0.005);
+	noFill();
+	stroke(0, 150, 0);
+	strokeWeight(1);
+	for (let lon = -180; lon <= 180; lon += 10) {
+		let x1 = G.xFromLonRad(deg2rad(lon));
+		let y1 = G.yFromLatRad(deg2rad(-85.051));
+		let y2 = G.yFromLatRad(deg2rad(85.051));
+		beginShape();
+		vertex(x1, y1);
+		vertex(x1, y2);
+		endShape(LINES);
+	}
+	for (let lat = -80; lat <= 80; lat += 10) {
+		let x1 = G.xFromLonRad(deg2rad(-180));
+		let x2 = G.xFromLonRad(deg2rad(180));
+		let y1 = G.yFromLatRad(deg2rad(lat));
+		beginShape();
+		vertex(x1, y1);
+		vertex(x2, y1);
+		endShape(LINES);
+	}
+	pop();
+}
